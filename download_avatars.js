@@ -1,7 +1,8 @@
 var request = require('request');
 var secret = require('./secrets');
 var fs = require('fs');
-var inputData = process.argv.slice(2);
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
 
 
 console.log('Welcome to the GitHub Avatar Downloader!');
@@ -35,13 +36,14 @@ request(options, function(err, res, body) {
 });
 }
 
-getRepoContributors(inputData[0], inputData[1], function(err, result) {
-  if(!inputData[0] && !inputData[1]) {
+getRepoContributors(repoOwner, repoName, function(err, result) {
+  if(repoName === undefined || repoOwner === undefined) {
+    console.log("Error:", err);
     console.log("Please enter the repository owner and repository name");
   }
-  console.log("Result:", result);
 });  
 
+// node download_avatars.js jquery jquery
 
 
 
